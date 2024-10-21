@@ -61,8 +61,8 @@ class UsuarioDAO implements BaseDAO {
                 WHERE u.Id = :usuarioID";
         
         $stmt = $this->db->prepare($sql);
-            
-        $stmt->execute([':id' => $usuarioID]);
+
+        $stmt->execute([':usuarioID' => $usuarioID]);
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -76,14 +76,14 @@ class UsuarioDAO implements BaseDAO {
         );
 
         $usuario = new Usuario(
-            $row['u_Id'],
-            $row['u_NomeUsuario'],
-            $row['u_Senha'],
-            $row['u_Email'],
-            $row['u_GrupoUsuarioID'],
-            $row['u_Ativo'],
-            $row['u_DataCriacao'],
-            $row['u_DataAtualizacao']                
+            $row['u_id'],
+            $row['u_nomeUsuario'],
+            $row['u_senha'],
+            $row['u_email'],
+            $row['u_grupoUsuarioID'],
+            $row['u_ativo'],
+            $row['u_dataCriacao'],
+            $row['u_dataAtualizacao']                
         );
 
         $usuario->setGrupoUsuario($grupoUsuario);

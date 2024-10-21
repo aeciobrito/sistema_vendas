@@ -69,7 +69,12 @@ class Usuario {
     }
 
     public function __toString() {
-        return "UsuarioID: $this->id, Nome: $this->nomeUsuario, Email: $this->email";
+        $info = "UsuarioID: $this->id, Nome: $this->nomeUsuario, Email: $this->email";
+
+        if($this->grupoUsuario != null) {
+            $info = $info . "\n Grupo Usuario: $this->grupoUsuario";
+        }
+        return $info;
     }
 }
 

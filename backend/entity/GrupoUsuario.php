@@ -8,6 +8,8 @@ class GrupoUsuario {
     private $usuarioAtualizacao;
     private $ativo;
 
+    private $permissoes = [];
+
     public function __construct($id, $nome, $descricao, $dataCriacao, $dataAtualizacao, $ativo = 1) {
         $this->id = $id;
         $this->nome = $nome;
@@ -48,6 +50,24 @@ class GrupoUsuario {
 
     public function getPermissoes() {
         return $this->permissoes;
+    }
+
+    public function setPermissoes($permissoes) {
+        $this->permissoes = $permissoes;
+    }
+
+    public function __toString()
+    {
+        $info = "GrupoUsuarioID: $this->id, Nome: $this->nome, Descricao: $this->descricao";
+
+        if(!empty($this->permissoes)) {
+            $info .= "\nPermissões: ";
+            foreach ($this->permissoes as $permissao) {
+                $info .= "\n - " . $permissao;
+            }
+        }
+
+        return $info;   
     }
 }
 

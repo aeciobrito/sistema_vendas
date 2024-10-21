@@ -61,6 +61,63 @@ class GrupoUsuarioDAO implements BaseDAO {
         }
     }
     
+    public function getGrupoUsuarioWithPermissions($grupoUsuarioID) {
+        $sql = "SELECT 
+                    g.Id AS g_id,
+                    g.Nome AS g_nome,
+                    g.Descricao AS g_descricao,
+                    g.DataCriacao AS g_dataCriacao,
+                    g.DataAtualizacao AS g_dataAtualizacao,
+                    g.UsuarioAtualizacao AS g_usuarioAtualizacao,
+                    g.Ativo AS g_ativo,
+                    p.Id AS p_id,
+                    p.Nome AS p_nome,
+                    p.Descricao AS p_descricao,
+                    p.DataCriacao AS p_dataCriacao,
+                    p.DataAtualizacao AS p_dataAtualizacao,
+                    p.UsuarioAtualizacao AS p_usuarioAtualizacao,
+                    p.Ativo AS p_ativo
+                FROM GrupoUsuario g
+                JOIN PermissaoGrupo pg ON g.Id = pg.GrupoUsuarioID
+                JOIN Permissao p ON pg.PermissaoID = p.Id
+                WHERE g.Id = :grupoUsuarioID";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':grupoUsuarioID', $grupoUsuarioID);
+        $stmt->execute();
+
+        $grupoUsuario = null;
+        $permissoes = [];
+
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if($grupoUsuario === null) {
+                $grupoUsuario = new GrupoUsuario(
+                    $row['g_id'],
+                    $row['g_nome'],
+                    $row['g_descricao'],
+                    $row['g_dataCriacao'],
+                    $row['g_dataAtualizacao'],
+                    $row['p_ativo']
+                );
+            }
+
+            $permissoes[] = new Permissao(
+                $row['p_id'],
+                $row['p_nome'],
+                $row['p_descricao'],
+                $row['p_dataCriacao'],
+                $row['p_dataAtualizacao'],
+                $row['p_usuarioAtualizacao'],
+                $row['p_ativo']
+            );
+        }
+
+        if($grupoUsuario !== null) {
+            $grupoUsuario->setPermissoes($permissoes);
+        }
+
+        return $grupoUsuario;
+    }
 
     public function create($grupoUsuario) {
         try {

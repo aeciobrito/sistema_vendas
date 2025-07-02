@@ -5,4 +5,4 @@ Sistema básico exemplificando as interações de uma aplicação desenvolvida a
 O sistema utiliza um banco de dados desenvolvido com o [MySql](https://www.mysql.com/)
 
 ### Diagrama
-![image](/banco_de_dados/diagrama_bd.png)
+![image](/database/diagrama_bd.png)

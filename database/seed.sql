@@ -1,6 +1,6 @@
 -- GrupoUsuario Padrão
 INSERT INTO GrupoUsuario (Nome, Descricao) VALUES
-	('Sistema', 'Grupo de Usuários Responsável Pelo Sistema'),
+	('Sistema', 'Responsáveis Pelo Sistema'),
     ('Administrador', 'Gerenciador de Perfis e Recursos do Sistema'),
     ('Generico', 'Grupo de usuários padrão do sistema');
 

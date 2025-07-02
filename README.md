@@ -6,9 +6,3 @@ O sistema utiliza um banco de dados desenvolvido com o [MySql](https://www.mysql
 
 ### Diagrama
 ![image](/banco_de_dados/diagrama_bd.png)
-
-## Backend
--- Reservado para o desenvolvimento em PHP
-
-## Frontend
--- Reservado para o desenvolvimento em React

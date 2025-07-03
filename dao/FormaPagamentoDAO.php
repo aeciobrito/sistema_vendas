@@ -5,14 +5,14 @@ class FormaPagamentoDAO extends BaseDAO
     private function mapObject(array $row): FormaPagamento
     {
         return new FormaPagamento(
-            $row['Id'], $row['Nome'], $row['Descricao'], (bool)$row['Ativo'],
-            $row['DataCriacao'], $row['DataAtualizacao'], $row['UsuarioAtualizacao']
+            $row['id'], $row['nome'], $row['descricao'], (bool)$row['ativo'],
+            $row['data_criacao'], $row['data_atualizacao'], $row['usuario_atualizacao']
         );
     }
 
     public function create(FormaPagamento $formaPagamento): bool
     {
-        $sql = "INSERT INTO FormaPagamento (Nome, Descricao, UsuarioAtualizacao) VALUES (:nome, :descricao, :user_id)";
+        $sql = "INSERT INTO forma_pagamento (nome, descricao, usuario_atualizacao) VALUES (:nome, :descricao, :user_id)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':nome' => $formaPagamento->getNome(),
@@ -23,7 +23,7 @@ class FormaPagamentoDAO extends BaseDAO
 
     public function getById(int $id): ?FormaPagamento
     {
-        $stmt = $this->db->prepare("SELECT * FROM FormaPagamento WHERE Id = :id");
+        $stmt = $this->db->prepare("SELECT * FROM forma_pagamento WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $data = $stmt->fetch();
         return $data ? $this->mapObject($data) : null;
@@ -31,7 +31,7 @@ class FormaPagamentoDAO extends BaseDAO
 
     public function getAll(bool $somenteAtivos = true): array
     {
-        $sql = "SELECT * FROM FormaPagamento" . ($somenteAtivos ? " WHERE Ativo = 1" : "") . " ORDER BY Nome";
+        $sql = "SELECT * FROM forma_pagamento" . ($somenteAtivos ? " WHERE ativo = 1" : "") . " ORDER BY nome";
         $stmt = $this->db->query($sql);
         $result = [];
         foreach ($stmt->fetchAll() as $row) { $result[] = $this->mapObject($row); }
@@ -40,7 +40,7 @@ class FormaPagamentoDAO extends BaseDAO
 
     public function update(FormaPagamento $formaPagamento): bool
     {
-        $sql = "UPDATE FormaPagamento SET Nome = :nome, Descricao = :descricao, UsuarioAtualizacao = :user_id WHERE Id = :id";
+        $sql = "UPDATE forma_pagamento SET nome = :nome, descricao = :descricao, usuario_atualizacao = :user_id WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $formaPagamento->getId(),
@@ -52,14 +52,14 @@ class FormaPagamentoDAO extends BaseDAO
 
     public function softDelete(int $id): bool
     {
-        $sql = "UPDATE FormaPagamento SET Ativo = 0, UsuarioAtualizacao = :user_id WHERE Id = :id";
+        $sql = "UPDATE forma_pagamento SET ativo = 0, usuario_atualizacao = :user_id WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':id' => $id, ':user_id' => 1]);
     }
 
     public function hardDelete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM FormaPagamento WHERE Id = :id");
+        $stmt = $this->db->prepare("DELETE FROM forma_pagamento WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 }

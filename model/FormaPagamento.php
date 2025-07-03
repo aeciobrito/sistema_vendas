@@ -2,16 +2,16 @@
 
 class FormaPagamento extends Entidade
 {
-    private string $Nome;
-    private ?string $Descricao;
+    private string $nome;
+    private ?string $descricao;
 
-    public function __construct(?int $Id, string $Nome, ?string $Descricao, bool $Ativo = true, ?string $DataCriacao = null, ?string $DataAtualizacao = null, ?int $UsuarioAtualizacao = null)
+    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null)
     {
-        parent::__construct($Id, $Ativo, $DataCriacao, $DataAtualizacao, $UsuarioAtualizacao);
-        $this->Nome = $Nome;
-        $this->Descricao = $Descricao;
+        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        $this->nome = $nome;
+        $this->descricao = $descricao;
     }
 
-    public function getNome(): string { return $this->Nome; }
-    public function getDescricao(): ?string { return $this->Descricao; }
+    public function getNome(): string { return $this->nome; }
+    public function getDescricao(): ?string { return $this->descricao; }
 }

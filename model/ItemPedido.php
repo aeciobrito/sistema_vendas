@@ -1,24 +1,35 @@
 <?php
 
-class ItemPedido extends Entidade
+/**
+ * ItemPedido não herda de Entidade, pois é um objeto de valor
+ * fortemente acoplado a um Pedido. Seus dados de auditoria são menos relevantes
+ * que os do Pedido principal.
+ */
+class ItemPedido
 {
-    private int $PedidoId;
-    private Produto $Produto;
-    private int $Quantidade;
-    private float $PrecoUnitario;
+    private ?int $id;
+    private int $pedido_id;
+    private Produto $produto;
+    private int $quantidade;
+    private float $preco_unitario;
 
-    public function __construct(?int $Id, int $PedidoId, Produto $Produto, int $Quantidade, float $PrecoUnitario, bool $Ativo = true, ?string $DataCriacao = null, ?string $DataAtualizacao = null, ?int $UsuarioAtualizacao = null)
+    public function __construct(?int $id, int $pedido_id, Produto $produto, int $quantidade, float $preco_unitario)
     {
-        parent::__construct($Id, $Ativo, $DataCriacao, $DataAtualizacao, $UsuarioAtualizacao);
-        $this->PedidoId = $PedidoId;
-        $this->Produto = $Produto;
-        $this->Quantidade = $Quantidade;
-        $this->PrecoUnitario = $PrecoUnitario;
+        $this->id = $id;
+        $this->pedido_id = $pedido_id;
+        $this->produto = $produto;
+        $this->quantidade = $quantidade;
+        $this->preco_unitario = $preco_unitario;
     }
 
-    public function getPedidoId(): int { return $this->PedidoId; }
-    public function getProduto(): Produto { return $this->Produto; }
-    public function getQuantidade(): int { return $this->Quantidade; }
-    public function getPrecoUnitario(): float { return $this->PrecoUnitario; }
-    public function getSubtotal(): float { return $this->PrecoUnitario * $this->Quantidade; }
+    public function getId(): ?int { return $this->id; }
+    public function getPedidoId(): int { return $this->pedido_id; }
+    public function getProduto(): Produto { return $this->produto; }
+    public function getQuantidade(): int { return $this->quantidade; }
+    public function getPrecoUnitario(): float { return $this->preco_unitario; }
+    
+    public function getSubtotal(): float
+    {
+        return $this->preco_unitario * $this->quantidade;
+    }
 }

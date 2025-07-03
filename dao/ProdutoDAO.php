@@ -5,17 +5,17 @@ class ProdutoDAO extends BaseDAO
     private function mapObject(array $row): Produto
     {
         $categoriaDAO = new CategoriaDAO();
-        $categoria = isset($row['CategoriaID']) ? $categoriaDAO->getById($row['CategoriaID']) : null;
+        $categoria = isset($row['categoria_id']) ? $categoriaDAO->getById($row['categoria_id']) : null;
 
         return new Produto(
-            $row['Id'], $row['Nome'], $row['Descricao'], (float)$row['Preco'], $categoria, (bool)$row['Ativo'],
-            $row['DataCriacao'], $row['DataAtualizacao'], $row['UsuarioAtualizacao']
+            $row['id'], $row['nome'], $row['descricao'], (float)$row['preco'], $categoria, (bool)$row['ativo'],
+            $row['data_criacao'], $row['data_atualizacao'], $row['usuario_atualizacao']
         );
     }
 
     public function create(Produto $produto): bool
     {
-        $sql = "INSERT INTO Produto (Nome, Descricao, Preco, CategoriaID, UsuarioAtualizacao) 
+        $sql = "INSERT INTO produto (nome, descricao, preco, categoria_id, usuario_atualizacao) 
                 VALUES (:nome, :descricao, :preco, :categoria_id, :user_id)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
@@ -29,7 +29,7 @@ class ProdutoDAO extends BaseDAO
 
     public function getById(int $id): ?Produto
     {
-        $stmt = $this->db->prepare("SELECT * FROM Produto WHERE Id = :id");
+        $stmt = $this->db->prepare("SELECT * FROM produto WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $data = $stmt->fetch();
         return $data ? $this->mapObject($data) : null;
@@ -37,7 +37,7 @@ class ProdutoDAO extends BaseDAO
 
     public function getAll(bool $somenteAtivos = true): array
     {
-        $sql = "SELECT * FROM Produto" . ($somenteAtivos ? " WHERE Ativo = 1" : "") . " ORDER BY Nome";
+        $sql = "SELECT * FROM produto" . ($somenteAtivos ? " WHERE ativo = 1" : "") . " ORDER BY nome";
         $stmt = $this->db->query($sql);
         $result = [];
         foreach ($stmt->fetchAll() as $row) { $result[] = $this->mapObject($row); }
@@ -46,7 +46,7 @@ class ProdutoDAO extends BaseDAO
 
     public function update(Produto $produto): bool
     {
-        $sql = "UPDATE Produto SET Nome = :nome, Descricao = :descricao, Preco = :preco, CategoriaID = :categoria_id, UsuarioAtualizacao = :user_id WHERE Id = :id";
+        $sql = "UPDATE produto SET nome = :nome, descricao = :descricao, preco = :preco, categoria_id = :categoria_id, usuario_atualizacao = :user_id WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $produto->getId(),
@@ -60,14 +60,14 @@ class ProdutoDAO extends BaseDAO
 
     public function softDelete(int $id): bool
     {
-        $sql = "UPDATE Produto SET Ativo = 0, UsuarioAtualizacao = :user_id WHERE Id = :id";
+        $sql = "UPDATE produto SET ativo = 0, usuario_atualizacao = :user_id WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':id' => $id, ':user_id' => 1]);
     }
 
     public function hardDelete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM Produto WHERE Id = :id");
+        $stmt = $this->db->prepare("DELETE FROM produto WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 }

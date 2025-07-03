@@ -2,30 +2,34 @@
 
 class Pedido extends Entidade
 {
-    private Cliente $Cliente;
-    private string $DataPedido;
-    private FormaPagamento $FormaPagamento;
-    private string $Status;
-    private array $Itens;
+    private Usuario $cliente;
+    private string $data_pedido;
+    private FormaPagamento $forma_pagamento;
+    private string $status;
+    private array $itens;
 
-    public function __construct(?int $Id, Cliente $Cliente, string $DataPedido, FormaPagamento $FormaPagamento, string $Status, bool $Ativo = true, array $Itens = [], ?string $DataCriacao = null, ?string $DataAtualizacao = null, ?int $UsuarioAtualizacao = null)
-    {
-        parent::__construct($Id, $Ativo, $DataCriacao, $DataAtualizacao, $UsuarioAtualizacao);
-        $this->Cliente = $Cliente;
-        $this->DataPedido = $DataPedido;
-        $this->FormaPagamento = $FormaPagamento;
-        $this->Status = $Status;
-        $this->Itens = $Itens;
+    public function __construct(
+        ?int $id, Usuario $cliente, string $data_pedido, FormaPagamento $forma_pagamento, string $status, 
+        bool $ativo = true, array $itens = [], ?string $data_criacao = null, ?string $data_atualizacao = null, 
+        ?int $usuario_atualizacao = null
+    ) {
+        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        $this->cliente = $cliente;
+        $this->data_pedido = $data_pedido;
+        $this->forma_pagamento = $forma_pagamento;
+        $this->status = $status;
+        $this->itens = $itens;
     }
 
-    public function getCliente(): Cliente { return $this->Cliente; }
-    public function getDataPedido(): string { return $this->DataPedido; }
-    public function getFormaPagamento(): FormaPagamento { return $this->FormaPagamento; }
-    public function getStatus(): string { return $this->Status; }
-    public function getItens(): array { return $this->Itens; }
-    public function setItens(array $itens): void { $this->Itens = $itens; }
+    public function getCliente(): Usuario { return $this->cliente; }
+    public function getDataPedido(): string { return $this->data_pedido; }
+    public function getFormaPagamento(): FormaPagamento { return $this->forma_pagamento; }
+    public function getStatus(): string { return $this->status; }
+    public function getItens(): array { return $this->itens; }
+    public function setItens(array $itens): void { $this->itens = $itens; }
+    
     public function getTotal(): float
     {
-        return array_reduce($this->Itens, fn($total, $item) => $total + $item->getSubtotal(), 0.0);
+        return array_reduce($this->itens, fn($total, $item) => $total + $item->getSubtotal(), 0.0);
     }
 }

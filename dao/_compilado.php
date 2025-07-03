@@ -11,22 +11,7 @@ require_once __DIR__ . '/../model/ItemPedido.php';
 
 require_once __DIR__ . '/../core/Database.php';
 
-
-abstract class BaseDAO
-{
-    protected PDO $db;
-
-    public function __construct()
-    {
-        $this->db = Database::getInstance();
-    }
-}
-
-// -----------------------------------------------------------------------------
-// DAO para Entidades Simples
-// -----------------------------------------------------------------------------
-
-class CategoriaDAO extends BaseDAO
+class CategoriaDAO
 {
     private function mapObject(array $row): Categoria
     {
@@ -90,7 +75,7 @@ class CategoriaDAO extends BaseDAO
     }
 }
 
-class FormaPagamentoDAO extends BaseDAO
+class FormaPagamentoDAO
 {
     private function mapObject(array $row): FormaPagamento
     {
@@ -158,7 +143,7 @@ class FormaPagamentoDAO extends BaseDAO
 // DAO para Entidades com Relacionamentos
 // -----------------------------------------------------------------------------
 
-class UsuarioDAO extends BaseDAO
+class UsuarioDAO
 {
     private function mapObject(array $row): Usuario
     {
@@ -244,7 +229,7 @@ class UsuarioDAO extends BaseDAO
     }
 }
 
-class ProdutoDAO extends BaseDAO
+class ProdutoDAO
 {
     private function mapObject(array $row): Produto
     {
@@ -316,7 +301,7 @@ class ProdutoDAO extends BaseDAO
     }
 }
 
-class ItemPedidoDAO extends BaseDAO
+class ItemPedidoDAO
 {
     private function mapObject(array $row): ItemPedido
     {
@@ -354,7 +339,7 @@ class ItemPedidoDAO extends BaseDAO
     }
 }
 
-class PedidoDAO extends BaseDAO
+class PedidoDAO
 {
     private function mapObject(array $row): Pedido
     {

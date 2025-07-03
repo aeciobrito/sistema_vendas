@@ -1,7 +1,17 @@
 <?php
 
-class CategoriaDAO extends BaseDAO
+require_once __DIR__ . '/../model/Categoria.php';
+require_once __DIR__ . '/../core/Database.php';
+
+class CategoriaDAO
 {
+    protected PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     private function mapObject(array $row): Categoria
     {
         return new Categoria(

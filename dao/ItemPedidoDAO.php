@@ -1,7 +1,17 @@
 <?php
 
-class ItemPedidoDAO extends BaseDAO
+require_once __DIR__ . '/../model/ItemPedido.php';
+require_once __DIR__ . '/../core/Database.php';
+
+class ItemPedidoDAO
 {
+    protected PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     private function mapObject(array $row): ItemPedido
     {
         $produtoDAO = new ProdutoDAO();

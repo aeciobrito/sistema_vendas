@@ -1,7 +1,17 @@
 <?php
 
-class ProdutoDAO extends BaseDAO
+require_once __DIR__ . '/../model/Produto.php';
+require_once __DIR__ . '/../core/Database.php';
+
+class ProdutoDAO
 {
+    protected PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     private function mapObject(array $row): Produto
     {
         $categoriaDAO = new CategoriaDAO();

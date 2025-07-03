@@ -1,7 +1,17 @@
 <?php
 
-class FormaPagamentoDAO extends BaseDAO
+require_once __DIR__ . '/../model/FormaPagamento.php';
+require_once __DIR__ . '/../core/Database.php';
+
+class FormaPagamentoDAO
 {
+    protected PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     private function mapObject(array $row): FormaPagamento
     {
         return new FormaPagamento(

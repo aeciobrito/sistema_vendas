@@ -1,7 +1,17 @@
 <?php
 
-class PedidoDAO extends BaseDAO
+require_once __DIR__ . '/../model/Pedido.php';
+require_once __DIR__ . '/../core/Database.php';
+
+class PedidoDAO
 {
+    protected PDO $db;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
     private function mapObject(array $row): Pedido
     {
         $usuarioDAO = new UsuarioDAO();

@@ -9,9 +9,9 @@ class Produto extends Entidade
 
     public function __construct(
         ?int $id, string $nome, ?string $descricao, float $preco, ?Categoria $categoria, bool $ativo = true, 
-        ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null
+        ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null
     ) {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->preco = $preco;

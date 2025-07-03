@@ -3,27 +3,27 @@
 class Pedido extends Entidade
 {
     private Usuario $cliente;
-    private string $data_pedido;
-    private FormaPagamento $forma_pagamento;
+    private string $dataPedido;
+    private FormaPagamento $formaPagamento;
     private string $status;
     private array $itens;
 
     public function __construct(
-        ?int $id, Usuario $cliente, string $data_pedido, FormaPagamento $forma_pagamento, string $status, 
-        bool $ativo = true, array $itens = [], ?string $data_criacao = null, ?string $data_atualizacao = null, 
-        ?int $usuario_atualizacao = null
+        ?int $id, Usuario $cliente, string $dataPedido, FormaPagamento $formaPagamento, string $status, 
+        bool $ativo = true, array $itens = [], ?string $dataCriacao = null, ?string $dataAtualizacao = null, 
+        ?int $usuarioAtualizacao = null
     ) {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->cliente = $cliente;
-        $this->data_pedido = $data_pedido;
-        $this->forma_pagamento = $forma_pagamento;
+        $this->dataPedido = $dataPedido;
+        $this->formaPagamento = $formaPagamento;
         $this->status = $status;
         $this->itens = $itens;
     }
 
     public function getCliente(): Usuario { return $this->cliente; }
-    public function getDataPedido(): string { return $this->data_pedido; }
-    public function getFormaPagamento(): FormaPagamento { return $this->forma_pagamento; }
+    public function getDataPedido(): string { return $this->dataPedido; }
+    public function getFormaPagamento(): FormaPagamento { return $this->formaPagamento; }
     public function getStatus(): string { return $this->status; }
     public function getItens(): array { return $this->itens; }
     public function setItens(array $itens): void { $this->itens = $itens; }

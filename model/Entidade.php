@@ -8,23 +8,23 @@
 class Entidade
 {
     protected ?int $id;
-    protected ?string $data_criacao;
-    protected ?string $data_atualizacao;
-    protected ?int $usuario_atualizacao;
+    protected ?string $dataCriacao;
+    protected ?string $dataAtualizacao;
+    protected ?int $usuarioAtualizacao;
     protected bool $ativo;
 
-    public function __construct(?int $id, bool $ativo, ?string $data_criacao, ?string $data_atualizacao, ?int $usuario_atualizacao)
+    public function __construct(?int $id, bool $ativo, ?string $dataCriacao, ?string $dataAtualizacao, ?int $usuarioAtualizacao)
     {
         $this->id = $id;
         $this->ativo = $ativo;
-        $this->data_criacao = $data_criacao;
-        $this->data_atualizacao = $data_atualizacao;
-        $this->usuario_atualizacao = $usuario_atualizacao;
+        $this->dataCriacao = $dataCriacao;
+        $this->dataAtualizacao = $dataAtualizacao;
+        $this->usuarioAtualizacao = $usuarioAtualizacao;
     }
 
     public function getId(): ?int { return $this->id; }
     public function isAtivo(): bool { return $this->ativo; }
-    public function getDataCriacao(): ?string { return $this->data_criacao; }
-    public function getDataAtualizacao(): ?string { return $this->data_atualizacao; }
-    public function getUsuarioAtualizacao(): ?int { return $this->usuario_atualizacao; }
+    public function getDataCriacao(): ?string { return $this->dataCriacao; }
+    public function getDataAtualizacao(): ?string { return $this->dataAtualizacao; }
+    public function getUsuarioAtualizacao(): ?int { return $this->usuarioAtualizacao; }
 }

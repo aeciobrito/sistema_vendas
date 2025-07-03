@@ -5,9 +5,9 @@ class FormaPagamento extends Entidade
     private string $nome;
     private ?string $descricao;
 
-    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null)
+    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null)
     {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nome = $nome;
         $this->descricao = $descricao;
     }

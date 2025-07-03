@@ -8,25 +8,25 @@
 abstract class Entidade
 {
     protected ?int $id;
-    protected ?string $data_criacao;
-    protected ?string $data_atualizacao;
-    protected ?int $usuario_atualizacao;
+    protected ?string $dataCriacao;
+    protected ?string $dataAtualizacao;
+    protected ?int $usuarioAtualizacao;
     protected bool $ativo;
 
-    public function __construct(?int $id, bool $ativo, ?string $data_criacao, ?string $data_atualizacao, ?int $usuario_atualizacao)
+    public function __construct(?int $id, bool $ativo, ?string $dataCriacao, ?string $dataAtualizacao, ?int $usuarioAtualizacao)
     {
         $this->id = $id;
         $this->ativo = $ativo;
-        $this->data_criacao = $data_criacao;
-        $this->data_atualizacao = $data_atualizacao;
-        $this->usuario_atualizacao = $usuario_atualizacao;
+        $this->dataCriacao = $dataCriacao;
+        $this->dataAtualizacao = $dataAtualizacao;
+        $this->usuarioAtualizacao = $usuarioAtualizacao;
     }
 
     public function getId(): ?int { return $this->id; }
     public function isAtivo(): bool { return $this->ativo; }
-    public function getDataCriacao(): ?string { return $this->data_criacao; }
-    public function getDataAtualizacao(): ?string { return $this->data_atualizacao; }
-    public function getUsuarioAtualizacao(): ?int { return $this->usuario_atualizacao; }
+    public function getDataCriacao(): ?string { return $this->dataCriacao; }
+    public function getDataAtualizacao(): ?string { return $this->dataAtualizacao; }
+    public function getUsuarioAtualizacao(): ?int { return $this->usuarioAtualizacao; }
 }
 
 class Categoria extends Entidade
@@ -34,9 +34,9 @@ class Categoria extends Entidade
     private string $nome;
     private ?string $descricao;
 
-    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null)
+    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null)
     {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nome = $nome;
         $this->descricao = $descricao;
     }
@@ -50,9 +50,9 @@ class FormaPagamento extends Entidade
     private string $nome;
     private ?string $descricao;
 
-    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null)
+    public function __construct(?int $id, string $nome, ?string $descricao, bool $ativo = true, ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null)
     {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nome = $nome;
         $this->descricao = $descricao;
     }
@@ -63,38 +63,38 @@ class FormaPagamento extends Entidade
 
 class Usuario extends Entidade
 {
-    private string $nome_completo;
-    private string $nome_usuario;
+    private string $nomeCompleto;
+    private string $nomeUsuario;
     private string $senha;
     private ?string $email;
     private ?string $telefone;
     private ?string $cpf;
-    private bool $is_admin;
+    private bool $isAdmin;
     private ?string $token;
 
     public function __construct(
-        ?int $id, string $nome_completo, string $nome_usuario, string $senha, ?string $email, 
-        ?string $telefone, ?string $cpf, bool $is_admin = false, bool $ativo = true, ?string $token = null, 
-        ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null
+        ?int $id, string $nomeCompleto, string $nomeUsuario, string $senha, ?string $email, 
+        ?string $telefone, ?string $cpf, bool $isAdmin = false, bool $ativo = true, ?string $token = null, 
+        ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null
     ) {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
-        $this->nome_completo = $nome_completo;
-        $this->nome_usuario = $nome_usuario;
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
+        $this->nomeCompleto = $nomeCompleto;
+        $this->nomeUsuario = $nomeUsuario;
         $this->senha = $senha;
         $this->email = $email;
         $this->telefone = $telefone;
         $this->cpf = $cpf;
-        $this->is_admin = $is_admin;
+        $this->isAdmin = $isAdmin;
         $this->token = $token;
     }
 
-    public function getNomeCompleto(): string { return $this->nome_completo; }
-    public function getNomeUsuario(): string { return $this->nome_usuario; }
+    public function getNomeCompleto(): string { return $this->nomeCompleto; }
+    public function getNomeUsuario(): string { return $this->nomeUsuario; }
     public function getSenha(): string { return $this->senha; }
     public function getEmail(): ?string { return $this->email; }
     public function getTelefone(): ?string { return $this->telefone; }
     public function getCpf(): ?string { return $this->cpf; }
-    public function isAdmin(): bool { return $this->is_admin; }
+    public function isAdmin(): bool { return $this->isAdmin; }
     public function getToken(): ?string { return $this->token; }
 }
 
@@ -107,9 +107,9 @@ class Produto extends Entidade
 
     public function __construct(
         ?int $id, string $nome, ?string $descricao, float $preco, ?Categoria $categoria, bool $ativo = true, 
-        ?string $data_criacao = null, ?string $data_atualizacao = null, ?int $usuario_atualizacao = null
+        ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null
     ) {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nome = $nome;
         $this->descricao = $descricao;
         $this->preco = $preco;
@@ -125,27 +125,27 @@ class Produto extends Entidade
 class Pedido extends Entidade
 {
     private Usuario $cliente; // O cliente agora é um objeto Usuario
-    private string $data_pedido;
-    private FormaPagamento $forma_pagamento;
+    private string $dataPedido;
+    private FormaPagamento $formaPagamento;
     private string $status;
     private array $itens;
 
     public function __construct(
-        ?int $id, Usuario $cliente, string $data_pedido, FormaPagamento $forma_pagamento, string $status, 
-        bool $ativo = true, array $itens = [], ?string $data_criacao = null, ?string $data_atualizacao = null, 
-        ?int $usuario_atualizacao = null
+        ?int $id, Usuario $cliente, string $dataPedido, FormaPagamento $formaPagamento, string $status, 
+        bool $ativo = true, array $itens = [], ?string $dataCriacao = null, ?string $dataAtualizacao = null, 
+        ?int $usuarioAtualizacao = null
     ) {
-        parent::__construct($id, $ativo, $data_criacao, $data_atualizacao, $usuario_atualizacao);
+        parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->cliente = $cliente;
-        $this->data_pedido = $data_pedido;
-        $this->forma_pagamento = $forma_pagamento;
+        $this->dataPedido = $dataPedido;
+        $this->formaPagamento = $formaPagamento;
         $this->status = $status;
         $this->itens = $itens;
     }
 
     public function getCliente(): Usuario { return $this->cliente; }
-    public function getDataPedido(): string { return $this->data_pedido; }
-    public function getFormaPagamento(): FormaPagamento { return $this->forma_pagamento; }
+    public function getDataPedido(): string { return $this->dataPedido; }
+    public function getFormaPagamento(): FormaPagamento { return $this->formaPagamento; }
     public function getStatus(): string { return $this->status; }
     public function getItens(): array { return $this->itens; }
     public function setItens(array $itens): void { $this->itens = $itens; }
@@ -164,28 +164,28 @@ class Pedido extends Entidade
 class ItemPedido
 {
     private ?int $id;
-    private int $pedido_id;
+    private int $pedidoId;
     private Produto $produto;
     private int $quantidade;
-    private float $preco_unitario;
+    private float $precoUnitario;
 
-    public function __construct(?int $id, int $pedido_id, Produto $produto, int $quantidade, float $preco_unitario)
+    public function __construct(?int $id, int $pedidoId, Produto $produto, int $quantidade, float $precoUnitario)
     {
         $this->id = $id;
-        $this->pedido_id = $pedido_id;
+        $this->pedidoId = $pedidoId;
         $this->produto = $produto;
         $this->quantidade = $quantidade;
-        $this->preco_unitario = $preco_unitario;
+        $this->precoUnitario = $precoUnitario;
     }
 
     public function getId(): ?int { return $this->id; }
-    public function getPedidoId(): int { return $this->pedido_id; }
+    public function getPedidoId(): int { return $this->pedidoId; }
     public function getProduto(): Produto { return $this->produto; }
     public function getQuantidade(): int { return $this->quantidade; }
-    public function getPrecoUnitario(): float { return $this->preco_unitario; }
+    public function getPrecoUnitario(): float { return $this->precoUnitario; }
     
     public function getSubtotal(): float
     {
-        return $this->preco_unitario * $this->quantidade;
+        return $this->precoUnitario * $this->quantidade;
     }
 }

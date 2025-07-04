@@ -10,10 +10,10 @@ class Entidade
     protected ?int $id;
     protected ?string $dataCriacao;
     protected ?string $dataAtualizacao;
-    protected ?int $usuarioAtualizacao;
+    protected ?Usuario $usuarioAtualizacao;
     protected bool $ativo;
 
-    public function __construct(?int $id, bool $ativo, ?string $dataCriacao, ?string $dataAtualizacao, ?int $usuarioAtualizacao)
+    public function __construct(?int $id, bool $ativo, ?string $dataCriacao, ?string $dataAtualizacao, ?Usuario $usuarioAtualizacao = null)
     {
         $this->id = $id;
         $this->ativo = $ativo;
@@ -26,5 +26,5 @@ class Entidade
     public function isAtivo(): bool { return $this->ativo; }
     public function getDataCriacao(): ?string { return $this->dataCriacao; }
     public function getDataAtualizacao(): ?string { return $this->dataAtualizacao; }
-    public function getUsuarioAtualizacao(): ?int { return $this->usuarioAtualizacao; }
+    public function getUsuarioAtualizacao(): ?Usuario { return $this->usuarioAtualizacao; }
 }

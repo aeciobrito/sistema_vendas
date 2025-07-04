@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../core/Database.php';
+require_once __DIR__ . '/../database/Database.php';
 require_once __DIR__ . '/../model/Usuario.php';
  
 class UsuarioDAO

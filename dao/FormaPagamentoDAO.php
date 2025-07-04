@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../model/FormaPagamento.php';
-require_once __DIR__ . '/../core/Database.php';
+require_once __DIR__ . '/../model/Usuario.php';
+require_once __DIR__ . '/../database/Database.php';
 
 class FormaPagamentoDAO
 {

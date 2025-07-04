@@ -45,7 +45,7 @@ echo "\n";
 // 2. Criando um usuário (que será nosso cliente)
 echo "2. Criando um Usuário (Cliente)...\n";
 $cliente = new Usuario(
-    10, 'João da Silva', 'joao.silva', 'senha_super_segura', 'joao@exemplo.com',
+    10, 'João da Silva Souza', 'joao.silva', 'senha_super_segura', 'joao@exemplo.com',
     '11999998888', '123.456.789-00', false, true, null,
     $dataAtual, $dataAtual, $adminUser
 );

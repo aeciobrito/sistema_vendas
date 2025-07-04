@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../model/Produto.php';
 require_once __DIR__ . '/../model/Fornecedor.php'; // Incluir o model de Fornecedor
-require_once __DIR__ . '/../core/Database.php';
+require_once __DIR__ . '/../database/Database.php';
 
 class ProdutoDAO
 {

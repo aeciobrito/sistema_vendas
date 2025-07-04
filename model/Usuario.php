@@ -14,7 +14,7 @@ class Usuario extends Entidade
     public function __construct(
         ?int $id, string $nomeCompleto, string $nomeUsuario, string $senha, ?string $email, 
         ?string $telefone, ?string $cpf, bool $isAdmin = false, bool $ativo = true, ?string $token = null, 
-        ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?int $usuarioAtualizacao = null
+        ?string $dataCriacao = null, ?string $dataAtualizacao = null, ?Usuario $usuarioAtualizacao = null
     ) {
         parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->nomeCompleto = $nomeCompleto;

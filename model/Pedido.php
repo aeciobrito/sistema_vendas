@@ -11,7 +11,7 @@ class Pedido extends Entidade
     public function __construct(
         ?int $id, Usuario $cliente, string $dataPedido, FormaPagamento $formaPagamento, string $status, 
         bool $ativo = true, array $itens = [], ?string $dataCriacao = null, ?string $dataAtualizacao = null, 
-        ?int $usuarioAtualizacao = null
+        ?Usuario $usuarioAtualizacao = null
     ) {
         parent::__construct($id, $ativo, $dataCriacao, $dataAtualizacao, $usuarioAtualizacao);
         $this->cliente = $cliente;

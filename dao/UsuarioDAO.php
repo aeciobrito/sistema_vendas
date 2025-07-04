@@ -14,27 +14,52 @@ class UsuarioDAO
 
     private function mapObject(array $row): Usuario
     {
+        // Para o auto-relacionamento, buscamos o usuário que atualizou, se houver.
+        // Cuidado com loops infinitos se não for tratado corretamente. A base é a existência do ID.
+        $usuarioAtualizacao = null;
+        if (!empty($row['usuario_atualizacao'])) {
+             // Evita que o objeto tente buscar a si mesmo infinitamente se for o primeiro usuário
+            if ($row['id'] != $row['usuario_atualizacao']) {
+                 $usuarioAtualizacao = $this->getById($row['usuario_atualizacao']);
+            }
+        }
+
         return new Usuario(
-            $row['id'], $row['nome_completo'], $row['nome_usuario'], $row['senha'], $row['email'],
-            $row['telefone'], $row['cpf'], (bool)$row['is_admin'], (bool)$row['ativo'], $row['token'],
-            $row['data_criacao'], $row['data_atualizacao'], $row['usuario_atualizacao']
+            $row['id'],
+            $row['nome_completo'],
+            $row['nome_usuario'],
+            $row['senha'],
+            $row['email'],
+            $row['telefone'],
+            $row['cpf'],
+            (bool)$row['is_admin'],
+            (bool)$row['ativo'],
+            $row['token'],
+            $row['data_criacao'],
+            $row['data_atualizacao'],
+            $usuarioAtualizacao
         );
     }
-    
-    public function create(Usuario $usuario): bool
+
+    public function create(Usuario $usuario, int $adminId): bool
     {
-        $sql = "INSERT INTO usuario (nome_completo, nome_usuario, senha, email, telefone, cpf, is_admin, usuario_atualizacao) 
-                VALUES (:nome_completo, :nome_usuario, :senha, :email, :telefone, :cpf, :is_admin, :user_id)";
+        $sql = "INSERT INTO usuario (nome_completo, nome_usuario, senha, email, telefone, cpf, is_admin, token, usuario_atualizacao) 
+                VALUES (:nome_completo, :nome_usuario, :senha, :email, :telefone, :cpf, :is_admin, :token, :user_id)";
+        
         $stmt = $this->db->prepare($sql);
+        
+        // A senha deve ser armazenada como hash, nunca como texto puro.
+        // Ex: password_hash($usuario->getSenha(), PASSWORD_DEFAULT)
         return $stmt->execute([
             ':nome_completo' => $usuario->getNomeCompleto(),
             ':nome_usuario' => $usuario->getNomeUsuario(),
-            ':senha' => $usuario->getSenha(), // A senha já deve vir com hash
+            ':senha' => $usuario->getSenha(), // Lembre-se de usar hash aqui!
             ':email' => $usuario->getEmail(),
             ':telefone' => $usuario->getTelefone(),
             ':cpf' => $usuario->getCpf(),
-            ':is_admin' => $usuario->isAdmin() ? 1 : 0,
-            ':user_id' => 1
+            ':is_admin' => (int)$usuario->isAdmin(),
+            ':token' => $usuario->getToken(),
+            ':user_id' => $adminId
         ]);
     }
 
@@ -46,10 +71,10 @@ class UsuarioDAO
         return $data ? $this->mapObject($data) : null;
     }
 
-    public function getByEmail(string $email): ?Usuario
+    public function getByUsername(string $username): ?Usuario
     {
-        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE email = :email");
-        $stmt->execute([':email' => $email]);
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE nome_usuario = :username");
+        $stmt->execute([':username' => $username]);
         $data = $stmt->fetch();
         return $data ? $this->mapObject($data) : null;
     }
@@ -59,16 +84,27 @@ class UsuarioDAO
         $sql = "SELECT * FROM usuario" . ($somenteAtivos ? " WHERE ativo = 1" : "") . " ORDER BY nome_completo";
         $stmt = $this->db->query($sql);
         $result = [];
-        foreach ($stmt->fetchAll() as $row) { $result[] = $this->mapObject($row); }
+        foreach ($stmt->fetchAll() as $row) {
+            $result[] = $this->mapObject($row);
+        }
         return $result;
     }
 
-    public function update(Usuario $usuario): bool
+    public function update(Usuario $usuario, int $adminId): bool
     {
         $sql = "UPDATE usuario SET 
-                    nome_completo = :nome_completo, nome_usuario = :nome_usuario, email = :email, 
-                    telefone = :telefone, cpf = :cpf, is_admin = :is_admin, usuario_atualizacao = :user_id 
+                    nome_completo = :nome_completo, 
+                    nome_usuario = :nome_usuario, 
+                    email = :email, 
+                    telefone = :telefone, 
+                    cpf = :cpf, 
+                    is_admin = :is_admin,
+                    ativo = :ativo,
+                    usuario_atualizacao = :user_id 
                 WHERE id = :id";
+        
+        // Nota: Geralmente a senha não é atualizada neste método. 
+        // É comum ter um método separado como `updatePassword`.
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $usuario->getId(),
@@ -77,16 +113,17 @@ class UsuarioDAO
             ':email' => $usuario->getEmail(),
             ':telefone' => $usuario->getTelefone(),
             ':cpf' => $usuario->getCpf(),
-            ':is_admin' => $usuario->isAdmin() ? 1 : 0,
-            ':user_id' => 1
+            ':is_admin' => (int)$usuario->isAdmin(),
+            ':ativo' => (int)$usuario->isAtivo(),
+            ':user_id' => $adminId
         ]);
     }
 
-    public function softDelete(int $id): bool
+    public function softDelete(int $id, int $adminId): bool
     {
         $sql = "UPDATE usuario SET ativo = 0, usuario_atualizacao = :user_id WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([':id' => $id, ':user_id' => 1]);
+        return $stmt->execute([':id' => $id, ':user_id' => $adminId]);
     }
 
     public function hardDelete(int $id): bool

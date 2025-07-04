@@ -84,6 +84,5 @@ CREATE TABLE IF NOT EXISTS item_pedido (
     quantidade INT NOT NULL,
     preco_unitario DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (produto_id) REFERENCES produto(id) ON DELETE SET NULL,
-    FOREIGN KEY (pedido_id) REFERENCES pedido(id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_atualizacao) REFERENCES usuario(id) ON DELETE SET NULL
+    FOREIGN KEY (pedido_id) REFERENCES pedido(id) ON DELETE CASCADE
 );

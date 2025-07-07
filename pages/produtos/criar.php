@@ -1,38 +1,43 @@
 <?php
-// produtos/criar.php
-require_once '../core/Database.php';
-require_once '../core/authService.php';
-require_once '../dao/ProdutoDAO.php';
-require_once '../dao/CategoriaDAO.php';
+require_once __DIR__ . '/../../dao/CategoriaDAO.php';
+require_once __DIR__ . '/../../model/Categoria.php';
 
+// Busca todas as categorias ativas para preencher o <select>
 $categoriaDAO = new CategoriaDAO();
-$categorias = $categoriaDAO->getAll();
+$categorias = $categoriaDAO->getAll(true);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $produtoDAO = new ProdutoDAO();
-    if ($produtoDAO->create($_POST)) {
-        header('Location: listar.php');
-        exit();
-    }
-    $erro = "Erro ao criar produto.";
-}
-require_once '../templates/header.php';
+require_once __DIR__ . '/../template/header.php';
 ?>
+
 <h1>Novo Produto</h1>
-<?php if (isset($erro)) echo "<p>$erro</p>"; ?>
-<form method="POST">
-    <div><label for="Nome">Nome:</label><input type="text" name="Nome" id="Nome" required></div>
-    <div><label for="Descricao">Descrição:</label><textarea name="Descricao" id="Descricao"></textarea></div>
-    <div><label for="Preco">Preço:</label><input type="number" step="0.01" name="Preco" id="Preco" required></div>
-    <div>
-        <label for="CategoriaID">Categoria:</label>
-        <select name="CategoriaID" id="CategoriaID">
-            <option value="">Selecione</option>
+
+<form action="acoes.php" method="POST">
+    <input type="hidden" name="acao" value="criar">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="preco">Preço:</label>
+        <input type="number" id="preco" name="preco" step="0.01" required>
+    </div>
+    <div class="form-group">
+        <label for="categoria_id">Categoria:</label>
+        <select id="categoria_id" name="categoria_id">
+            <option value="">Selecione uma categoria</option>
             <?php foreach ($categorias as $categoria): ?>
-                <option value="<?= $categoria['Id'] ?>"><?= htmlspecialchars($categoria['Nome']) ?></option>
+                <option value="<?= $categoria->getId() ?>"><?= htmlspecialchars($categoria->getNome()) ?></option>
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="submit">Salvar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="index.php" class="btn btn-secondary">Cancelar</a>
 </form>
-<?php require_once '../templates/footer.php'; ?>
+
+<?php
+require_once __DIR__ . '/../template/footer.php';
+?>

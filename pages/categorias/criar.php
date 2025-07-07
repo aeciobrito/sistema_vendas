@@ -1,23 +1,24 @@
 <?php
-require_once '../core/Database.php';
-require_once '../core/authService.php';
-require_once '../dao/CategoriaDAO.php';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $dao = new CategoriaDAO();
-    if ($dao->create($_POST)) {
-        header('Location: listar.php');
-        exit();
-    }
-    $erro = "Erro ao criar categoria.";
-}
-require_once '../templates/header.php';
+// Este arquivo apenas exibe o formulário. O processamento é feito em 'acoes.php'
+require_once __DIR__ . '/../template/header.php';
 ?>
 
 <h1>Nova Categoria</h1>
-<?php if (isset($erro)) echo "<p>$erro</p>"; ?>
-<form method="POST">
-    <div><label for="Nome">Nome:</label><input type="text" name="Nome" id="Nome" required></div>
-    <div><label for="Descricao">Descrição:</label><textarea name="Descricao" id="Descricao"></textarea></div>
-    <button type="submit">Salvar</button>
+
+<form action="acoes.php" method="POST">
+    <input type="hidden" name="acao" value="criar">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="index.php" class="btn btn-secondary">Cancelar</a>
 </form>
-<?php require_once '../templates/footer.php'; ?>
+
+<?php
+require_once __DIR__ . '/../template/footer.php';
+?>

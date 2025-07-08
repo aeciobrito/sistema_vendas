@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../services/authService.php';
+requireAdmin();
 // Inclui todos os arquivos necessários
 require_once __DIR__ . '/../../model/Entidade.php';
 require_once __DIR__ . '/../../model/Produto.php';

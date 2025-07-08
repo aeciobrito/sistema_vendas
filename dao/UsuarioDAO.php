@@ -89,7 +89,7 @@ class UsuarioDAO
         }
         return $result;
     }
-
+    
     public function update(Usuario $usuario, int $adminId): bool
     {
         $sql = "UPDATE usuario SET 
@@ -103,8 +103,6 @@ class UsuarioDAO
                     usuario_atualizacao = :user_id 
                 WHERE id = :id";
         
-        // Nota: Geralmente a senha não é atualizada neste método. 
-        // É comum ter um método separado como `updatePassword`.
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $usuario->getId(),
@@ -113,8 +111,8 @@ class UsuarioDAO
             ':email' => $usuario->getEmail(),
             ':telefone' => $usuario->getTelefone(),
             ':cpf' => $usuario->getCpf(),
-            ':is_admin' => (int)$usuario->isAdmin(),
-            ':ativo' => (int)$usuario->isAtivo(),
+            ':is_admin' => (int)$usuario->isAdmin(), // Campo agora atualizável
+            ':ativo' => (int)$usuario->isAtivo(),     // Campo agora atualizável
             ':user_id' => $adminId
         ]);
     }

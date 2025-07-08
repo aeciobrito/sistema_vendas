@@ -1,0 +1,222 @@
+/* Reset básico e fontes */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    flex: 1;
+}
+
+/* --- ESTILOS PARA O CATÁLOGO DE PRODUTOS --- */
+
+/* Grid de Produtos */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; /* Espaçamento entre os cards */
+    justify-content: center;
+}
+
+/* Card Individual */
+.card {
+    width: 280px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden; /* Garante que a imagem não saia dos cantos arredondados */
+    display: flex;
+    flex-direction: column; /* Organiza os elementos do card em coluna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz esta área crescer para ocupar o espaço disponível */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.card-actions {
+    margin-top: auto; /* Empurra os botões para o final do card */
+    display: flex;
+    gap: 0.5rem; /* Espaço entre os botões */
+}
+
+.card-actions .btn {
+    flex: 1; /* Faz os botões ocuparem o espaço igualmente */
+}
+
+/* Cabeçalho / Toolbar */
+.toolbar {
+    background-color: #fff;
+    color: #333;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.toolbar .logo img {
+    height: 40px;
+    vertical-align: middle;
+}
+.toolbar .nav-menu a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.toolbar .nav-menu a:hover, .toolbar .user-actions a:hover {
+    color: #007bff;
+}
+.toolbar .user-actions a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- ESTILOS PARA O BOTÃO DO CARRINHO NO HEADER --- */
+
+.cart-button {
+    position: relative; /* Necessário para posicionar o contador */
+    margin-right: 20px;
+    font-size: 1.5rem; /* Aumenta o tamanho do emoji */
+    text-decoration: none;
+    color: #333;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    background-color: #f8f9fa;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-primary { background-color: #007bff; color: white; }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-secondary:hover { background-color: #5a6268; }
+.btn-danger { background-color: #dc3545; color: white; }
+.btn-danger:hover { background-color: #c82333; }
+.actions a { margin-right: 5px; }
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulários */
+form {
+    margin-top: 1.5rem;
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

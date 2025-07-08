@@ -16,8 +16,6 @@ require_once __DIR__ . '/../../dao/ItemPedidoDAO.php';
 require_once __DIR__ . '/../../model/Pedido.php';
 require_once __DIR__ . '/../../dao/PedidoDAO.php';
 
-// A CHAMADA session_start() FOI REMOVIDA DAQUI, POIS JÁ ESTÁ NO authService.
-
 $mensagem_erro = '';
 
 // BLOCO DE PROCESSAMENTO (SÓ EXECUTA EM REQUISIÇÕES POST)

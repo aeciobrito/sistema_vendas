@@ -119,6 +119,29 @@ body {
     font-weight: 500;
 }
 
+/* --- ESTILOS PARA O BOTÃO DO CARRINHO NO HEADER --- */
+
+.cart-button {
+    position: relative; /* Necessário para posicionar o contador */
+    margin-right: 20px;
+    font-size: 1.5rem; /* Aumenta o tamanho do emoji */
+    text-decoration: none;
+    color: #333;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
 /* Rodapé */
 .footer {
     background-color: #333;

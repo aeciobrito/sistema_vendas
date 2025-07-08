@@ -119,6 +119,30 @@ class UsuarioDAO
         ]);
     }
 
+    public function getByEmail(string $email): ?Usuario
+    {
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE email = :email LIMIT 1");
+        $stmt->execute([':email' => $email]);
+        $data = $stmt->fetch();
+        return $data ? $this->mapObject($data) : null;
+    }
+
+    public function getByToken(string $token): ?Usuario
+    {
+        // Busca por token apenas se o usuário estiver ativo
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE token = :token AND ativo = 1 LIMIT 1");
+        $stmt->execute([':token' => $token]);
+        $data = $stmt->fetch();
+        return $data ? $this->mapObject($data) : null;
+    }
+
+    public function updateToken(int $id, string $token): bool
+    {
+        $sql = "UPDATE usuario SET token = :token WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':token' => $token, ':id' => $id]);
+    }
+
     public function softDelete(int $id, int $adminId): bool
     {
         $sql = "UPDATE usuario SET ativo = 0, usuario_atualizacao = :user_id WHERE id = :id";

@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/../dao/CategoriaDAO.php';
 require_once __DIR__ . '/../model/Pedido.php';
 require_once __DIR__ . '/../model/ItemPedido.php';
 require_once __DIR__ . '/../model/Usuario.php';
@@ -51,7 +52,7 @@ class PedidoDAO
 
     // Criar um pedido é uma operação complexa que envolve múltiplas tabelas.
     // É essencial usar uma transação para garantir a consistência dos dados.
-    public function create(Pedido $pedido): bool
+    public function create(Pedido $pedido): int|false
     {
         $this->db->beginTransaction();
 
@@ -80,7 +81,7 @@ class PedidoDAO
             }
 
             $this->db->commit();
-            return true;
+            return (int)$pedidoId;
 
         } catch (Exception $e) {
             $this->db->rollBack();

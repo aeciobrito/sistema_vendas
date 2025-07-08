@@ -5,36 +5,41 @@
 </footer>
 
 <script>
-function adicionarAoCarrinho(id, nome, preco, imagemUrl) {
-    // Busca o carrinho atual do localStorage ou cria um array vazio
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    
-    // Verifica se o produto já existe no carrinho
-    const itemExistente = carrinho.find(item => item.id === id);
-    
-    if (itemExistente) {
-        // Se existe, apenas incrementa a quantidade
-        itemExistente.quantidade++;
-    } else {
-        // Se não existe, adiciona o novo item
-        carrinho.push({
-            id: id,
-            nome: nome,
-            preco: preco,
-            imagemUrl: imagemUrl,
-            quantidade: 1
-        });
+    // Função para atualizar o contador no header
+    function atualizarContadorCarrinho() {
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        // Soma a quantidade de todos os itens no carrinho
+        const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+        
+        const contador = document.getElementById('cart-counter');
+        if (contador) {
+            contador.innerText = totalItens;
+            // Mostra ou esconde o contador se for maior que zero
+            contador.style.display = totalItens > 0 ? 'block' : 'none';
+        }
     }
-    
-    // Salva o carrinho atualizado de volta no localStorage
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    
-    // Fornece um feedback visual ao usuário
-    alert('"' + nome + '" foi adicionado ao carrinho!');
-    
-    // Opcional: Atualizar um contador de itens no cabeçalho
-    // (Implementação futura)
-}
+
+    // Função para adicionar um item ao carrinho
+    function adicionarAoCarrinho(id, nome, preco, imagemUrl) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const itemExistente = carrinho.find(item => item.id === id);
+        
+        if (itemExistente) {
+            itemExistente.quantidade++;
+        } else {
+            carrinho.push({ id, nome, preco, imagemUrl, quantidade: 1 });
+        }
+        
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        alert('"' + nome + '" foi adicionado ao carrinho!');
+        
+        // Atualiza o contador no header
+        atualizarContadorCarrinho();
+    }
+
+    // Chama a função para garantir que o contador esteja correto ao carregar a página
+    document.addEventListener('DOMContentLoaded', atualizarContadorCarrinho);
+</script>
 </script>
 
 </body>

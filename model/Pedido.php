@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Entidade.php';
+
 class Pedido extends Entidade
 {
     private Usuario $cliente;

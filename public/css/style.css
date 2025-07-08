@@ -89,6 +89,9 @@ body {
 }
 
 /* Cabeçalho / Toolbar */
+.logo-nav {
+    display: flex;
+}
 .toolbar {
     background-color: #fff;
     color: #333;
@@ -117,6 +120,24 @@ body {
     color: #007bff;
     text-decoration: none;
     font-weight: 500;
+}
+
+/* --- ESTILOS PARA FLASH MESSAGES --- */
+.flash-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+.flash-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.flash-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
 
 /* --- ESTILOS PARA O BOTÃO DO CARRINHO NO HEADER --- */

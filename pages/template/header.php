@@ -18,9 +18,12 @@ require_once __DIR__ . '/../../services/authService.php';
             <img src="/sistema_vendas/public/img/logo.jpg" alt="Logo da Empresa">
         </a>
         <nav class="nav-menu">
-            <a href="/sistema_vendas/index.php">Home</a>
-            <a href="/sistema_vendas/pages/produtos/index.php">Produtos</a>
-            <a href="/sistema_vendas/pages/categorias/index.php">Categorias</a>
+            <a href="/sistema_vendas/index.php">Home</a>            
+            <?php if (isAdmin()): ?>
+                <a href="/sistema_vendas/pages/categorias/index.php">Gerenciar Categorias</a>
+                <a href="/sistema_vendas/pages/produtos/index.php">Gerenciar Produtos</a>
+                <a href="/sistema_vendas/pages/admin/usuarios.php">Gerenciar Usuários</a>
+            <?php endif; ?>
         </nav>
     </div>
 

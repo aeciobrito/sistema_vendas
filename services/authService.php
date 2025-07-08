@@ -6,7 +6,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../model/Entidade.php';
+// Os require_once podem ser movidos para dentro das funções para otimizar, 
+// mas deixá-los aqui simplifica o entendimento.
 require_once __DIR__ . '/../model/Usuario.php';
 require_once __DIR__ . '/../dao/UsuarioDAO.php';
 
@@ -19,7 +20,6 @@ function getLoggedUser(): ?Usuario {
         return null;
     }
     
-    // Para evitar buscas repetidas no banco, podemos usar a sessão para cachear o objeto
     if (isset($_SESSION['user_object'])) {
         return unserialize($_SESSION['user_object']);
     }
@@ -28,7 +28,6 @@ function getLoggedUser(): ?Usuario {
     $usuario = $dao->getByToken($_SESSION['user_token']);
 
     if ($usuario) {
-        // Armazena o objeto na sessão para otimizar
         $_SESSION['user_object'] = serialize($usuario);
     }
     
@@ -37,9 +36,28 @@ function getLoggedUser(): ?Usuario {
 
 function requireLogin(string $redirectUrl = '/sistema_vendas/pages/usuarios/login.php') {
     if (!isLoggedIn()) {
-        // Salva a URL que o usuário tentou acessar para redirecioná-lo de volta após o login
         $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
         header("Location: " . $redirectUrl);
+        exit();
+    }
+}
+
+function isAdmin(): bool {
+    $user = getLoggedUser();
+    return $user && $user->isAdmin();
+}
+
+function requireAdmin() {
+    requireLogin();
+    
+    // Se o usuário está logado, mas não é admin, redireciona para a home.
+    if (!isAdmin()) {
+        // Armazena uma mensagem de erro na sessão para ser exibida na página inicial.
+        $_SESSION['flash_message'] = [
+            'type' => 'error',
+            'message' => 'Acesso negado. Você não tem permissão para acessar esta página.'
+        ];
+        header('Location: /sistema_vendas/index.php');
         exit();
     }
 }

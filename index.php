@@ -15,6 +15,14 @@ $produtoDAO = new ProdutoDAO();
 $produtos = $produtoDAO->getAll(true);
 
 require_once __DIR__ . '/pages/template/header.php';
+
+if (isset($_SESSION['flash_message'])) {
+    $flash = $_SESSION['flash_message'];
+    // Adiciona uma classe CSS baseada no tipo de mensagem (error, success, etc.)
+    echo '<div class="flash-message ' . htmlspecialchars($flash['type']) . '">' . htmlspecialchars($flash['message']) . '</div>';
+    // Remove a mensagem da sessão para que não apareça novamente
+    unset($_SESSION['flash_message']);
+}
 ?>
 
 <h1>Nosso Catálogo de Produtos</h1>

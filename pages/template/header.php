@@ -11,7 +11,7 @@
 <header class="toolbar">
     <div class="logo-nav">
         <a href="/sistema_vendas/index.php" class="logo">
-            <img src="/sistema_vendas/public/images/logo.jpg" alt="Logo da Empresa">
+            <img src="/sistema_vendas/public/img/logo.jpg" alt="Logo da Empresa">
         </a>
         <nav class="nav-menu">
             <a href="/sistema_vendas/index.php">Home</a>
@@ -20,6 +20,10 @@
         </nav>
     </div>
     <div class="user-actions">
+        <a href="/sistema_vendas/pages/carrinho/index.php" class="cart-button">
+            <span class="cart-icon">🛒</span>
+            <span id="cart-counter" class="cart-badge">0</span>
+        </a>
         <a href="/sistema_vendas/pages/usuarios/login.php">Entre ou Cadastre-se</a>
     </div>
 </header>

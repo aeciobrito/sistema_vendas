@@ -1,5 +1,6 @@
 <?php
 // Inclui os arquivos necessários
+require_once __DIR__ . '/../../model/Entidade.php';
 require_once __DIR__ . '/../../model/Produto.php';
 require_once __DIR__ . '/../../dao/ProdutoDAO.php';
 // Incluídos para que o mapObject do ProdutoDAO funcione

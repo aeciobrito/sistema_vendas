@@ -26,6 +26,68 @@ body {
     flex: 1;
 }
 
+/* --- ESTILOS PARA O CATÁLOGO DE PRODUTOS --- */
+
+/* Grid de Produtos */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; /* Espaçamento entre os cards */
+    justify-content: center;
+}
+
+/* Card Individual */
+.card {
+    width: 280px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden; /* Garante que a imagem não saia dos cantos arredondados */
+    display: flex;
+    flex-direction: column; /* Organiza os elementos do card em coluna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz esta área crescer para ocupar o espaço disponível */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.card-actions {
+    margin-top: auto; /* Empurra os botões para o final do card */
+    display: flex;
+    gap: 0.5rem; /* Espaço entre os botões */
+}
+
+.card-actions .btn {
+    flex: 1; /* Faz os botões ocuparem o espaço igualmente */
+}
+
 /* Cabeçalho / Toolbar */
 .toolbar {
     background-color: #fff;

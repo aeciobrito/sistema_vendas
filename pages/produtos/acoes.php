@@ -1,5 +1,6 @@
 <?php
 // Inclui todos os arquivos necessários
+require_once __DIR__ . '/../../model/Entidade.php';
 require_once __DIR__ . '/../../model/Produto.php';
 require_once __DIR__ . '/../../dao/ProdutoDAO.php';
 require_once __DIR__ . '/../../model/Categoria.php';

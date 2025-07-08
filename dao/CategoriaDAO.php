@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../model/Categoria.php';
-require_once __DIR__ . '/../model/Usuario.php';
+require_once __DIR__ . '/UsuarioDAO.php';
 require_once __DIR__ . '/../database/Database.php';
 
 class CategoriaDAO

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../services/authService.php';
+require_once __DIR__ . '/../../config.php';
 requireAdmin(); // Proteção máxima: só admins podem ver esta página
 
 require_once __DIR__ . '/../../dao/UsuarioDAO.php';

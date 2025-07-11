@@ -1,0 +1,36 @@
+# Arquivo de configuração de ambiente de produção (contém senhas)
+/database/config.production.php
+
+# Arquivo de configuração de ambiente local
+/database/config.local.php
+
+# Arquivos de log que podem conter informações sensíveis
+*.log
+/logs/
+
+# Arquivos de cache
+/cache/
+
+# Dependências do Composer (se você usar no futuro)
+/vendor/
+composer.lock
+
+# Arquivos de ambiente padrão
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Arquivos de configuração de IDEs e editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários e de upload (se você tiver uma pasta para isso)
+/uploads/
+/temp/

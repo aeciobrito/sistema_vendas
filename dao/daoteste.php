@@ -30,7 +30,7 @@ require_once __DIR__ . '/PedidoDAO.php';
 
 // ATENÇÃO: Descomente as linhas abaixo se quiser limpar as tabelas antes de cada execução.
 // Útil para garantir que o teste comece sempre do zero.
-/*
+
 echo "LIMPANDO TABELAS...\n";
 $db = Database::getInstance();
 $db->exec('SET FOREIGN_KEY_CHECKS = 0');
@@ -42,7 +42,7 @@ $db->exec('TRUNCATE TABLE categoria');
 $db->exec('TRUNCATE TABLE usuario');
 $db->exec('SET FOREIGN_KEY_CHECKS = 1');
 echo "Tabelas limpas.\n\n";
-*/
+
 
 // Instancia todos os DAOs que serão utilizados
 $usuarioDAO = new UsuarioDAO();

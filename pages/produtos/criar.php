@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../services/authService.php';
+require_once __DIR__ . '/../../config.php';
 requireAdmin();
 require_once __DIR__ . '/../../model/Entidade.php';
 require_once __DIR__ . '/../../dao/CategoriaDAO.php';

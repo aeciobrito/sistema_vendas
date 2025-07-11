@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../services/authService.php';
+require_once __DIR__ . '/../../config.php';
 requireAdmin(); // Ação exclusiva para administradores
 
 $acao = $_POST['acao'] ?? '';

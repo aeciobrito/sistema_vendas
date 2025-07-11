@@ -1,5 +1,4 @@
 <?php
-// /services/authService.php
 
 // Garante que a sessão seja iniciada em qualquer lugar que este serviço for usado.
 if (session_status() === PHP_SESSION_NONE) {

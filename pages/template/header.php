@@ -1,7 +1,5 @@
 <?php
-// Inclui o serviço de autenticação para verificar o status do login
-// Usar __DIR__ garante que o caminho funcione de qualquer página que inclua este header
-require_once __DIR__ . '/../../services/authService.php'; 
+require_once __DIR__ . '/../../config.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

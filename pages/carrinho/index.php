@@ -1,6 +1,5 @@
 <?php
-// O authService já inicia a sessão, então ele deve vir primeiro.
-require_once __DIR__ . '/../../services/authService.php';
+require_once __DIR__ . '/../../config.php';
 
 // Inclui todos os outros arquivos de Model e DAO necessários
 require_once __DIR__ . '/../../database/Database.php';

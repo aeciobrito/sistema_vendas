@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../bootstrap.php';
 requireAdmin(); // Proteção máxima: só admins podem ver esta página
 
-require_once __DIR__ . '/../../dao/UsuarioDAO.php';
 
 $usuarioDAO = new UsuarioDAO();
 $usuarios = [];

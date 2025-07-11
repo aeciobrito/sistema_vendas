@@ -7,8 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Os require_once podem ser movidos para dentro das funções para otimizar, 
 // mas deixá-los aqui simplifica o entendimento.
-require_once __DIR__ . '/../model/Usuario.php';
-require_once __DIR__ . '/../dao/UsuarioDAO.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 function isLoggedIn(): bool {
     return isset($_SESSION['user_token']);

@@ -1,16 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config.php';
-requireAdmin(); 
-// Inclui os arquivos necessários
-require_once __DIR__ . '/../../model/Entidade.php';
-require_once __DIR__ . '/../../model/Produto.php';
-require_once __DIR__ . '/../../dao/ProdutoDAO.php';
-// Incluídos para que o mapObject do ProdutoDAO funcione
-require_once __DIR__ . '/../../model/Categoria.php';
-require_once __DIR__ . '/../../dao/CategoriaDAO.php';
-require_once __DIR__ . '/../../model/Usuario.php';
-require_once __DIR__ . '/../../dao/UsuarioDAO.php';
-
+require_once __DIR__ . '/../../bootstrap.php';
+requireAdmin();
 
 $produtoDAO = new ProdutoDAO();
 // Busca todos os produtos (ativos e inativos) para gestão

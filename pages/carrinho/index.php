@@ -1,20 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config.php';
-
-// Inclui todos os outros arquivos de Model e DAO necessários
-require_once __DIR__ . '/../../database/Database.php';
-require_once __DIR__ . '/../../model/Entidade.php';
-require_once __DIR__ . '/../../model/Usuario.php';
-require_once __DIR__ . '/../../dao/UsuarioDAO.php';
-require_once __DIR__ . '/../../model/FormaPagamento.php';
-require_once __DIR__ . '/../../dao/FormaPagamentoDAO.php';
-require_once __DIR__ . '/../../model/Produto.php';
-require_once __DIR__ . '/../../dao/ProdutoDAO.php';
-require_once __DIR__ . '/../../model/ItemPedido.php';
-require_once __DIR__ . '/../../dao/ItemPedidoDAO.php';
-require_once __DIR__ . '/../../model/Pedido.php';
-require_once __DIR__ . '/../../dao/PedidoDAO.php';
-
+require_once __DIR__ . '/../../bootstrap.php';
 $mensagem_erro = '';
 
 // BLOCO DE PROCESSAMENTO (SÓ EXECUTA EM REQUISIÇÕES POST)

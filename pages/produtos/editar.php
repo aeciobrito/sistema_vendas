@@ -1,15 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../bootstrap.php';
 requireAdmin();
-
-require_once __DIR__ . '/../../model/Entidade.php';
-require_once __DIR__ . '/../../model/Produto.php';
-require_once __DIR__ . '/../../dao/ProdutoDAO.php';
-require_once __DIR__ . '/../../model/Categoria.php';
-require_once __DIR__ . '/../../dao/CategoriaDAO.php';
-require_once __DIR__ . '/../../model/Usuario.php';
-require_once __DIR__ . '/../../dao/UsuarioDAO.php';
-
 
 // Pega o ID da URL e busca o produto
 $id = $_GET['id'] ?? 0;

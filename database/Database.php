@@ -8,17 +8,17 @@ class Database
     {
         if (self::$instance === null) {
             
-            // Lê as configurações que foram definidas pelos arquivos config.*.php
-            $db_host = getenv('DB_HOST');
-            $db_name = getenv('DB_NAME');
-            $db_user = getenv('DB_USER');
-            $db_pass = getenv('DB_PASS');
-            $use_ssl = getenv('DB_USE_SSL') === 'true';
-
-            // Verificação de segurança para garantir que as configurações foram carregadas
-            if ($db_host === false || $db_name === false || $db_user === false) {
-                die("Erro Crítico: As variáveis de ambiente do banco de dados não foram carregadas. Verifique o arquivo config.php.");
+            // Verificação de segurança para garantir que as constantes de configuração foram carregadas
+            if (!defined('DB_HOST') || !defined('DB_NAME') || !defined('DB_USER')) {
+                die("Erro Crítico: As constantes de configuração do banco de dados não foram carregadas. Verifique o arquivo config.php e os arquivos config.*.php.");
             }
+
+            // Lê as configurações das constantes que foram definidas pelos arquivos config.*.php
+            $db_host = DB_HOST;
+            $db_name = DB_NAME;
+            $db_user = DB_USER;
+            $db_pass = DB_PASS;
+            $use_ssl = (defined('DB_USE_SSL') && DB_USE_SSL === 'true');
             
             try {
                 // Opções padrão da conexão PDO
@@ -42,7 +42,6 @@ class Database
                 );
                 
             } catch (PDOException $e) {
-                // Em produção, é melhor logar o erro do que exibi-lo na tela.
                 error_log("Erro de conexão com o banco de dados: " . $e->getMessage());
                 die("Erro: Não foi possível conectar ao banco de dados. Por favor, tente novamente mais tarde.");
             }

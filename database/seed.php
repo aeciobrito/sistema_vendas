@@ -2,11 +2,7 @@
 // Este script deve ser executado uma única vez para inicializar o sistema.
 
 header('Content-Type: text/plain; charset=utf-8');
-
-require_once __DIR__ . '/Database.php';
-require_once __DIR__ . '/../model/Entidade.php';
-require_once __DIR__ . '/../model/Usuario.php';
-require_once __DIR__ . '/../dao/UsuarioDAO.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 echo "Iniciando script de inicialização (seeder)...\n";
 

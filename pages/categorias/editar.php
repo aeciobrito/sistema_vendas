@@ -1,10 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../bootstrap.php';
 requireAdmin();
-
-require_once __DIR__ . '/../../model/Entidade.php';
-require_once __DIR__ . '/../../model/Categoria.php';
-require_once __DIR__ . '/../../dao/CategoriaDAO.php';
 
 // Pega o ID da URL e busca a categoria
 $id = $_GET['id'] ?? 0;

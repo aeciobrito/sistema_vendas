@@ -1,10 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../dao/CategoriaDAO.php';
-require_once __DIR__ . '/../model/Pedido.php';
-require_once __DIR__ . '/../model/ItemPedido.php';
-require_once __DIR__ . '/../model/Usuario.php';
-require_once __DIR__ . '/../database/Database.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 class PedidoDAO
 {

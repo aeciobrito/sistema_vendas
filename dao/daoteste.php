@@ -10,23 +10,8 @@ echo "===============================================\n";
 echo "INICIANDO TESTE DA CAMADA DE ACESSO A DADOS (DAO)\n";
 echo "===============================================\n\n";
 
-// Inclui a conexão com o banco e todas as classes
-require_once __DIR__ . '/../database/Database.php';
-require_once __DIR__ . '/../model/Entidade.php';
-// Models
-require_once __DIR__ . '/../model/Usuario.php';
-require_once __DIR__ . '/../model/Categoria.php';
-require_once __DIR__ . '/../model/FormaPagamento.php';
-require_once __DIR__ . '/../model/Produto.php';
-require_once __DIR__ . '/../model/ItemPedido.php';
-require_once __DIR__ . '/../model/Pedido.php';
-// DAOs
-require_once __DIR__ . '/UsuarioDAO.php';
-require_once __DIR__ . '/CategoriaDAO.php';
-require_once __DIR__ . '/FormaPagamentoDAO.php';
-require_once __DIR__ . '/ProdutoDAO.php';
-require_once __DIR__ . '/ItemPedidoDAO.php';
-require_once __DIR__ . '/PedidoDAO.php';
+require_once __DIR__ . '/../bootstrap.php';
+
 
 // ATENÇÃO: Descomente as linhas abaixo se quiser limpar as tabelas antes de cada execução.
 // Útil para garantir que o teste comece sempre do zero.

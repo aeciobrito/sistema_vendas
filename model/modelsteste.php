@@ -3,14 +3,7 @@
 // Define um cabeçalho para formatar a saída no navegador
 header('Content-Type: text/plain; charset=utf-8');
 
-// Inclui todas as classes de Modelo necessárias para o teste
-require_once __DIR__ . '/Entidade.php';
-require_once __DIR__ . '/Usuario.php'; // Incluir Usuario antes para que outras classes possam usá-lo
-require_once __DIR__ . '/Categoria.php';
-require_once __DIR__ . '/FormaPagamento.php';
-require_once __DIR__ . '/Produto.php';
-require_once __DIR__ . '/ItemPedido.php';
-require_once __DIR__ . '/Pedido.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 echo "===============================================\n";
 echo "INICIANDO TESTE DE INSTANCIAÇÃO DE MODELS\n";

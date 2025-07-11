@@ -1,14 +1,6 @@
 <?php
-// Inclui os arquivos necessários para buscar os produtos
-require_once __DIR__ . '/model/Entidade.php';
-require_once __DIR__ . '/model/Produto.php';
-require_once __DIR__ . '/dao/ProdutoDAO.php';
-// Incluídos para que o mapObject do ProdutoDAO funcione corretamente
-require_once __DIR__ . '/model/Entidade.php';
-require_once __DIR__ . '/model/Categoria.php';
-require_once __DIR__ . '/dao/CategoriaDAO.php';
-require_once __DIR__ . '/model/Usuario.php';
-require_once __DIR__ . '/dao/UsuarioDAO.php';
+
+require_once __DIR__ . '/bootstrap.php';
 
 $produtoDAO = new ProdutoDAO();
 // Busca apenas os produtos ativos para exibir no catálogo

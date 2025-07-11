@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../bootstrap.php';
+
 requireAdmin();
 // Este arquivo apenas exibe o formulário. O processamento é feito em 'acoes.php'
 require_once __DIR__ . '/../template/header.php';

@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../bootstrap.php';
+
 requireAdmin();
 // Inclui os arquivos necessários
 require_once __DIR__ . '/../../model/Categoria.php';
